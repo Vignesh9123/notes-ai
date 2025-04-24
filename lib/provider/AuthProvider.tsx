@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { User } from '@supabase/supabase-js';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { createClient } from '@/utils/supabase/client';
 interface AuthContextType {
   user: User | null;
@@ -19,7 +19,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const pathname = usePathname();
   const supabase = createClient();
+  const protectedRoutes = ["/dashboard", "/notes", "/settings"]
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -27,7 +29,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(session?.user ?? null);
         setLoading(false);
         if (event === 'SIGNED_IN') {
-          router.push('/dashboard');
+          if (!protectedRoutes.some(route => pathname.startsWith(route))) {
+            router.push('/dashboard');
+          }
         }
         if (event === 'SIGNED_OUT') {
           router.push('/');

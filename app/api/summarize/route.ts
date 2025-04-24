@@ -11,7 +11,6 @@ async function generateSummary(noteText: string): Promise<string> {
     prompt:`Summarize the following note text: ${noteText}`
   })
 
-  console.log('Summary:', text)
   return text
 }
 

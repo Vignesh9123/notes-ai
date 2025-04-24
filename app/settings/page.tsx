@@ -10,6 +10,7 @@ import { Switch } from '@/components/ui/switch';
 import { useAuth } from '@/lib/provider/AuthProvider';
 import { useToast } from '@/hooks/use-toast';
 import { Moon, Save, Sun } from 'lucide-react';
+import { useTheme } from "next-themes";
 
 export default function SettingsPage() {
   const { user } = useAuth();
@@ -18,6 +19,7 @@ export default function SettingsPage() {
   const [darkMode, setDarkMode] = useState(false);
   const [autosave, setAutosave] = useState(true);
   const [saveInterval, setSaveInterval] = useState(30);
+  const { setTheme , theme} = useTheme();
   
   const handleSaveSettings = () => {
     toast({
@@ -105,8 +107,8 @@ export default function SettingsPage() {
                   </div>
                   <Switch
                     id="dark-mode"
-                    checked={darkMode}
-                    onCheckedChange={setDarkMode}
+                    checked={theme === "dark"}
+                    onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
                   />
                 </div>
               </div>
