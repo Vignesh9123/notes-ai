@@ -139,7 +139,7 @@ export default function DashboardPage() {
                           variant="ghost"
                           size="icon"
                           className="h-8 w-8 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 hover:text-destructive"
-                          onClick={(e) => handleDelete(note.id, e)}
+                          onClick={(e: React.MouseEvent) => handleDelete(note.id, e)}
                         >
                           <Trash className="h-4 w-4" />
                           <span className="sr-only">Delete</span>
@@ -154,7 +154,7 @@ export default function DashboardPage() {
                 <FileText className="h-4 w-4" />
                 <AlertTitle>No notes found</AlertTitle>
                 <AlertDescription>
-                  You haven't created any notes yet. Click the "New Note" button to get started.
+                  You haven&apos;t created any notes yet. Click the &quot;New Note&quot; button to get started.
                 </AlertDescription>
               </Alert>
             )}

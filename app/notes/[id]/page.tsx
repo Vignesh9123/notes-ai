@@ -181,7 +181,7 @@ export default function NotePage() {
           <div className="mx-auto max-w-3xl">
             <div className="rounded-lg border border-destructive/20 bg-destructive/5 p-4">
               <h2 className="text-lg font-semibold">Note not found</h2>
-              <p className="mt-2">The note you're looking for doesn't exist or you don't have permission to view it.</p>
+              <p className="mt-2">The note you&apos;re looking for doesn&apos;t exist or you don&apos;t have permission to view it.</p>
               <Button
                 variant="outline"
                 className="mt-4"
