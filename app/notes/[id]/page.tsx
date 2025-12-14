@@ -201,7 +201,7 @@ export default function NotePage() {
     );
   }
 
-  if (!note) {
+  if (!isLoading && !note) {
     return (
       <div className="flex min-h-screen flex-col">
         <Header />
