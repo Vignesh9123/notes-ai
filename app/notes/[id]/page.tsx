@@ -136,23 +136,51 @@ export default function NotePage() {
   };
 
   const formatContent = (text: string) => {
-    return text
-      .split('\n')
-      .map((line, i) => {
-        if (line.startsWith('## ')) {
-          return <h2 key={i} className="mb-3 mt-6 text-xl font-bold">{line.substring(3)}</h2>;
-        } else if (line.startsWith('# ')) {
-          return <h1 key={i} className="mb-4 mt-8 text-2xl font-bold">{line.substring(2)}</h1>;
-        } else if (line.startsWith('- ')) {
-          return <li key={i} className="ml-5">{line.substring(2)}</li>;
-        } else if (line === '') {
-          return <br key={i} />;
-        } else {
-          return <p key={i} className="mb-2">{line}</p>;
-        }
-      });
+    return text.split('\n').map((line, i) => {
+      if (line.startsWith('## ')) {
+        return (
+          <h2 key={i} className="mb-3 mt-6 text-xl font-bold">
+            {line.substring(3)}
+          </h2>
+        );
+      }
+  
+      if (line.startsWith('# ')) {
+        return (
+          <h1 key={i} className="mb-4 mt-8 text-2xl font-bold">
+            {line.substring(2)}
+          </h1>
+        );
+      }
+  
+      if (line.startsWith('- ')) {
+        return (
+          <li key={i} className="ml-5">
+            {line.substring(2)}
+          </li>
+        );
+      }
+  
+      const boldLabelMatch = line.match(/^\*\*(.+?)\*\:\s*(.*)$/);
+      if (boldLabelMatch) {
+        return (
+          <p key={i} className="mb-2">
+            <strong>{boldLabelMatch[1]}:</strong>{' '}
+            {boldLabelMatch[2]}
+          </p>
+        );
+      }  
+      if (line === '') {
+        return <br key={i} />;
+      }  
+      return (
+        <p key={i} className="mb-2">
+          {line}
+        </p>
+      );
+    });
   };
-
+  
   if (isLoading) {
     return (
       <div className="flex min-h-screen flex-col">
