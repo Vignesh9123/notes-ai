@@ -173,7 +173,7 @@ export default function NotePage() {
     );
   }
 
-  if (!isLoading &&!note) {
+  if (!note) {
     return (
       <div className="flex min-h-screen flex-col">
         <Header />
