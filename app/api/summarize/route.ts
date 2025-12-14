@@ -7,7 +7,7 @@ async function generateSummary(noteText: string): Promise<string> {
   const model = google('gemini-2.5-flash')
   const {text} = await generateText({
     model,
-    system:'You are a note text summarizer. You will be given a note text and you will generate a summary of the textThe summary should be clear and concise. The summary should be formatted in markdown, with title, headings, and bullet points if needed.',
+    system:'You are a note text summarizer. You will be given a note text and you will generate a summary of the textThe summary should be clear and concise. The summary should be formatted in markdown, with title, headings, and bullet points if needed. Bullet points should start with - not *.',
     prompt:`Summarize the following note text: ${noteText}`
   })
 
